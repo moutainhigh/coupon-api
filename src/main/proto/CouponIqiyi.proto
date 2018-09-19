@@ -1,0 +1,77 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "CouponIqiyiProto";
+
+message CouponIqiyiDTO {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //创建人
+    Long createdBy = 3;
+    //创建时间
+    String createdTime = 4;
+    //更新人
+    Long updatedBy = 5;
+    //更新时间
+    String updatedTime = 6;
+    //是否删除，1-未删除，2-已删除
+    Integer deleted = 7;
+    //订单编码
+    String orderNo = 8;
+    //商品id
+    Long productId = 9;
+    //卡号
+    String cardNo = 10;
+    //密钥
+    String cardPwd = 11;
+    //卡券使用有效期起始日期
+    String effectiveDateStart = 12;
+    //卡券使用有效期终止日期
+    String effectiveDateEnd = 13;
+    //品类编码
+    String configCode = 14;
+
+    //买家id
+    Long buyerId = 15;
+    //买家手机号码
+    String buyerPhone = 16;
+    //是否被分配，1-未分配，2-已分配
+    Integer allocationStatus =17;
+    //发放时间
+    Long releaseTime = 18;
+    //短信内容
+    String msgContent = 19;
+
+}
+
+
+message CouponIqiyiResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    CouponIqiyiDTO dataInfo = 3;
+}
+message CouponIqiyiListResponse{
+    Integer returnCode = 1;
+    string message = 2;
+    repeated CouponIqiyiDTO dataInfo = 3;
+}
+
+
+service CouponIqiyiService {
+    rpc add (CouponIqiyiDTO) returns (CouponIqiyiResponse) {
+    }
+    rpc query (CouponIqiyiDTO) returns (CouponIqiyiResponse) {
+    }
+    rpc update (CouponIqiyiDTO) returns (CouponIqiyiResponse) {
+    }
+    rpc delete (CouponIqiyiDTO) returns (CouponIqiyiResponse) {
+    }
+    rpc queryByProductId(CouponIqiyiDTO)returns (CouponIqiyiListResponse){
+
+    }
+
+
+}

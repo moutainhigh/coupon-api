@@ -1,0 +1,224 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "CouponDetailProto";
+
+message CouponDetailDTO {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //创建人
+    Long createdBy = 3;
+    //创建时间
+    Long createdTime = 4;
+    //更新人
+    Long updatedBy = 5;
+    //更新时间
+    Long updatedTime = 6;
+    //是否删除，1-未删除，2-已删除
+    Integer deleted = 7;
+    //卡号
+    String cardNo = 8;
+    //密码
+    String cardPwd = 9;
+    //卡券类型批次号
+    String couponTypeBatchNo = 10;
+    //订单编号
+    String orderNo = 11;
+    //买家id
+    Long buyerId = 12;
+    //买家手机号码
+    String buyerPhone = 13;
+    //是否被分配，1-未分配，2-已分配
+    Integer allocationStatus = 14;
+    //发放时间
+    Long releaseTime = 15;
+    //短信内容
+    String msgContent = 16;
+    //是否重发过短信，1-未重发，2-已重发
+    Integer resendMsgStatus = 17;
+    //是否失效，1-未失效，2-已失效
+    Integer invalid = 18;
+    //失效人
+    Long invalidBy = 19;
+    //失效时间
+    Long invalidTime = 20;
+    //订单ID
+    Long orderId = 21;
+    //券码来源（0-平台发券，1-哈根达斯，2-肯德基）
+    Integer couponSource = 22;
+    //卡券使用有效期起始日期
+    Long effectiveDateStart = 23;
+    //卡券使用有效期终止日期
+    Long effectiveDateEnd = 24;
+
+}
+message CouponDetailRequest {
+    Integer pageNumber = 5;
+    Integer pageSize = 6;
+}
+message CouponDetailResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    CouponDetailDTO dataInfo = 3;
+}
+
+message CouponDetailListRequest {
+    repeated CouponDetailDTO records = 1;
+}
+
+message CouponDetailPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated CouponDetailDTO records = 3;
+    int32 current = 4;
+    int32 size = 5;
+    int32 total = 6;
+    int32 pages = 7;
+    int32 offset = 8;
+    int32 limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+
+message CouponDetailMixRequest {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //批次号
+    string batchNo = 3;
+    //名称
+    string name = 4;
+    //关联商品productid
+    Long relatedGoods = 5;
+    //商品sku
+    Long relatedGoodsSku = 6;
+    //商品名称
+    string relatedGoodsName = 7;
+    //关联商户
+    Long relatedBusiness = 8;
+    //卖家名称
+    string relatedBusinessName = 9;
+    //卡券使用有效期-str
+    string effectiveDateStr = 10;
+    //卡券使用有效期起始日期-str
+    string effectiveDateStartStr = 11;
+    //卡券使用有效期终止日期-str
+    string effectiveDateEndStr = 12;
+    //卡券使用有效期起始日期开始日期-str
+    string effectiveDateStartStartStr = 13;
+    //卡券使用有效期起始日期结束日期-str
+    string effectiveDateStartEndStr = 14;
+    //卡券使用有效期终止日期开始日期-str
+    string effectiveDateEndStartStr = 15;
+    //卡券使用有效期终止日期结束日期-str
+    string effectiveDateEndEndStr = 16;
+    //下架日期开始日期-str
+    string offDateStartStr = 17;
+    //下架日期结束日期-str
+    string offDateEndStr = 18;
+    //卡券下架日期-str
+    string offDateStr = 19;
+    //创建日期str
+    string createdTimeStr = 20;
+    //是否已下架，1-未下架，2-已下架
+    Integer offStatus = 21;
+    //是否已下架，1-未下架，2-已下架-描述
+    string offStatusDesc = 22;
+
+    //订单号
+    string orderNo = 23;
+    //卡号
+    string cardNo = 24;
+    //发放时间
+    string releaseTimeStr = 25;
+    //买家手机号
+    string buyerPhone = 26;
+    //券码状态
+    string couponDetailStatus = 27;
+    //券码状态-描述
+    string couponDetailStatusDesc = 28;
+    //是否失效，1-未失效，2-已失效
+    Integer invalid = 29;
+    //是否被分配，1-未分配，2-已分配
+    Integer allocationStatus = 30;
+    //卡密
+    string cardPwd = 31;
+    //当前页
+    Integer pageNumber = 32;
+    //每页显示条目数
+    Integer pageSize = 33;
+
+    //批次号
+    string couponTypeBatchNo = 34;
+    //生效日期
+    Long effectiveDateStart = 35;
+    //失效日期
+    Long effectiveDateEnd = 36;
+    //子订单id
+    Long subOrderId = 37;
+
+    //操作者
+    Long currentUserId = 38;
+
+    //操作者orgid
+    repeated string currentUserOrgIds = 39;
+}
+
+message CouponDetailMixRequestResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated CouponDetailMixRequest dataInfo = 3;
+}
+
+message CouponDetailMixRequestPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated CouponDetailMixRequest records = 3;
+    Integer current = 4;
+    Integer size = 5;
+    Integer total = 6;
+    Integer pages = 7;
+    Integer offset = 8;
+    Integer limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+
+service CouponDetailService {
+    rpc add (CouponDetailDTO) returns (CouponDetailResponse) {
+    }
+    rpc query (CouponDetailDTO) returns (CouponDetailResponse) {
+    }
+    rpc update (CouponDetailDTO) returns (CouponDetailResponse) {
+    }
+    rpc delete (CouponDetailDTO) returns (CouponDetailResponse) {
+    }
+    rpc page (CouponDetailRequest) returns (CouponDetailPageResponse) {
+    }
+
+    //验证重复卡券
+    rpc validRepeatData (CouponDetailListRequest) returns (CouponDetailPageResponse) {
+    }
+    //失效卡券-按批次
+    rpc loseEfficacyByBatch (CouponDetailDTO) returns (CouponDetailResponse) {
+    }
+
+    rpc findCouponDetail (CouponDetailMixRequest) returns (CouponDetailMixRequestPageResponse) {
+    }
+    rpc updateModel (CouponDetailMixRequest) returns (CouponDetailResponse) {
+    }
+
+    rpc findCouponDetailToLoseEfficacy (CouponDetailMixRequest) returns (CouponDetailMixRequestResponse) {
+    }
+
+    rpc findCouponDetailToRelease (CouponDetailMixRequest) returns (CouponDetailResponse) {
+    }
+}

@@ -1,0 +1,77 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "ProductThirdpartyRelatedProto";
+
+message ProductThirdpartyRelatedDTO {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //创建人
+    Long createdBy = 3;
+    //创建时间
+    Long createdTime = 4;
+    //更新人
+    Long updatedBy = 5;
+    //更新时间
+    Long updatedTime = 6;
+    //是否删除，1-未删除，2-已删除
+    Integer deleted = 7;
+    //商品sku
+    Long skuId = 8;
+    //商户ID
+    Long merchantId = 9;
+    //1-哈根达斯，2-肯德基
+    Integer serviceParty = 10;
+    //服务地址1
+    String serviceUrl1 = 11;
+    //服务地址2
+    String serviceUrl2 = 12;
+    //服务地址3
+    String serviceUrl3 = 13;
+    //第三方方商品ID
+    String thirdProductId = 14;
+
+}
+message ProductThirdpartyRelatedRequest {
+    Integer pageNumber = 5;
+    Integer pageSize = 6;
+}
+message ProductThirdpartyRelatedResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    ProductThirdpartyRelatedDTO dataInfo = 3;
+}
+
+message ProductThirdpartyRelatedPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated ProductThirdpartyRelatedDTO records = 3;
+    int32 current = 4;
+    int32 size = 5;
+    int32 total = 6;
+    int32 pages = 7;
+    int32 offset = 8;
+    int32 limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+service ProductThirdpartyRelatedService {
+    rpc add (ProductThirdpartyRelatedDTO) returns (ProductThirdpartyRelatedResponse) {
+    }
+    rpc query (ProductThirdpartyRelatedDTO) returns (ProductThirdpartyRelatedResponse) {
+    }
+    rpc update (ProductThirdpartyRelatedDTO) returns (ProductThirdpartyRelatedResponse) {
+    }
+    rpc delete (ProductThirdpartyRelatedDTO) returns (ProductThirdpartyRelatedResponse) {
+    }
+    rpc page (ProductThirdpartyRelatedRequest) returns (ProductThirdpartyRelatedPageResponse) {
+    }
+}
+
+
+

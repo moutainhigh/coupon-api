@@ -1,0 +1,167 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.moses.order.query.api";
+option java_outer_classname = "OrderItemProto";
+
+message OrderItemDTO {
+  //主键
+  int64 id = 1;
+  //应用编号
+  Long appId = 2;
+  //主订单id
+  Long mainOrderId = 3;
+  //订单id
+  Long orderId = 4;
+  //订单编号
+  string orderNo = 5;
+  //主订单编号
+  string mainOrderNo = 6;
+  //商品SKU
+  string sku = 7;
+  //商品id
+  Long productId = 8;
+  //商品快照ID
+  Long productSnapshotId = 9;
+  //商品名称
+  string productName = 10;
+  //商品编码
+  string productCode = 11;
+  //商品所属商家
+  Long merchantId = 12;
+  //购买数量
+  Long buyQty = 13;
+  //商品销售价格
+  Integer salePrice = 14;
+  //商品属性
+  string property = 15;
+  //优惠金额
+  int32 privilegeAmount = 16;
+  //商品支付金额（金额小计）
+  Integer productPayAmount = 17;
+  //优惠方式
+  Integer privilegeType = 18;
+  //是否已评论(1:未评价 2:已评价)
+  Integer isComment = 19;
+  //已退数量
+  int32 refundQty = 20;
+  //是否可以退款
+  Integer isRefund = 21;
+  //返利
+  int32 rebate = 22;
+  //创建人
+  Long createdBy = 23;
+  //创建时间
+  Long createdTime = 24;
+  //更新人
+  Long updatedBy = 25;
+  //更新时间
+  Long updatedTime = 26;
+  //删除标识(1:在线; 2:删除)
+  Integer deleted = 27;
+  string coverImage = 30;
+  //申请退款次数
+  int32 refundTimes = 31;
+  /**
+  * 退款金额
+  */
+  Integer refundAmount = 32;
+
+  string field1 = 33;
+
+  string field2 = 34;
+
+  string field3 = 35;
+
+  string field4 = 36;
+
+  string field5 = 37;
+
+  Integer field6 = 38;
+
+  Integer field7 = 39;
+
+  Integer field8 = 40;
+
+  Integer field9 = 41;
+
+  Integer field10 = 42;
+
+  /**
+   * 生效时间
+   */
+  Long field11 = 43;
+
+  /**
+   * 失效时间
+   */
+  Long field12 = 44;
+
+  Long field13 = 45;
+
+  Long field14 = 46;
+
+  Long field15 = 47;
+
+}
+
+message CheckCouponOrderDTO{
+  int64 orderItemId=1;
+  int64 subOrderId=2;
+  int64 userId=3;
+}
+
+
+message OrderItemRequest {
+  Integer pageNumber = 5;
+  Integer pageSize = 6;
+  Long orderId = 7;
+  Long userId = 11;
+  Long productId = 12;
+  Long appId = 13;
+  //主订单ids
+  repeated int64 mainOrderIds = 8;
+  Long mainOrderId = 9;
+  repeated int64 orderIds = 10;
+}
+message OrderItemResponse {
+  Integer returnCode = 1;
+  string message = 2;
+  OrderItemDTO dataInfo = 3;
+}
+
+message OrderItemPageResponse {
+  Integer returnCode = 1;
+  string message = 2;
+  repeated OrderItemDTO records = 3;
+  Integer current = 4;
+  Integer size = 5;
+  Integer total = 6;
+  Integer pages = 7;
+  Integer offset = 8;
+  Integer limit = 9;
+  string orderByField = 10;
+  bool searchCount = 11;
+  bool optimizeCount = 12;
+  bool isAsc = 13;
+}
+service OrderItemService {
+  rpc add (OrderItemDTO) returns (OrderItemResponse) {
+  }
+  rpc query (OrderItemDTO) returns (OrderItemResponse) {
+  }
+  rpc update (OrderItemDTO) returns (OrderItemResponse) {
+  }
+  rpc delete (OrderItemDTO) returns (OrderItemResponse) {
+  }
+  rpc page (OrderItemRequest) returns (OrderItemPageResponse) {
+  }
+  rpc comment (OrderItemDTO) returns (OrderItemResponse) {
+  }
+  rpc checkCouponOrder(CheckCouponOrderDTO) returns(OrderItemResponse){
+  }
+
+}
+
+
+

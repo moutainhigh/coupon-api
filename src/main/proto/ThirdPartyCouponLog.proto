@@ -1,0 +1,77 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "ThirdPartyCouponLogProto";
+
+message ThirdPartyCouponLogDTO {
+    //主键
+    Long id = 1;
+    //创建人
+    Long createdBy = 2;
+    //创建时间
+    Long createdTime = 3;
+    //更新人
+    Long updatedBy = 4;
+    //更新时间
+    Long updatedTime = 5;
+    //删除标识(1:在线; 2:删除)
+    Integer deleted = 6;
+    //app_id
+    Long appId = 7;
+    //主订单id
+    Long mainOrderId = 8;
+    //子订单id
+    Long subOrderId = 9;
+    //1-哈根达斯，2-肯德基
+    Integer serviceParty = 10;
+    //请求地址
+    String serviceUrl = 11;
+    //请求报文
+    String requestContext = 12;
+    //响应报文
+    String responseContext = 13;
+    //响应标识（1-成功，2-失败）
+    Integer returnCode = 14;
+
+}
+message ThirdPartyCouponLogRequest {
+    Integer pageNumber = 5;
+    Integer pageSize = 6;
+}
+message ThirdPartyCouponLogResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    ThirdPartyCouponLogDTO dataInfo = 3;
+}
+
+message ThirdPartyCouponLogPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated ThirdPartyCouponLogDTO records = 3;
+    int32 current = 4;
+    int32 size = 5;
+    int32 total = 6;
+    int32 pages = 7;
+    int32 offset = 8;
+    int32 limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+service ThirdPartyCouponLogService {
+    rpc add (ThirdPartyCouponLogDTO) returns (ThirdPartyCouponLogResponse) {
+    }
+    rpc query (ThirdPartyCouponLogDTO) returns (ThirdPartyCouponLogResponse) {
+    }
+    rpc update (ThirdPartyCouponLogDTO) returns (ThirdPartyCouponLogResponse) {
+    }
+    rpc delete (ThirdPartyCouponLogDTO) returns (ThirdPartyCouponLogResponse) {
+    }
+    rpc page (ThirdPartyCouponLogRequest) returns (ThirdPartyCouponLogPageResponse) {
+    }
+}
+
+
+

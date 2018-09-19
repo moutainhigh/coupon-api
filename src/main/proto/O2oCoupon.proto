@@ -1,0 +1,217 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "O2oCouponProto";
+
+message O2oCouponDTO {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //创建人
+    Long createdBy = 3;
+    //创建时间
+    Long createdTime = 4;
+    //更新人
+    Long updatedBy = 5;
+    //更新时间
+    Long updatedTime = 6;
+    //是否删除，1-未删除，2-已删除
+    Integer deleted = 7;
+    //订单编号
+    String orderNo = 8;
+    //券码
+    String couponCode = 9;
+    //使用有效期起始日期
+    Long effectiveDateStart = 10;
+    //使用有效期终止日期
+    Long effectiveDateEnd = 11;
+    //买家id
+    Long buyerId = 12;
+    //买家手机号码
+    String buyerPhone = 13;
+    //是否被使用，1-未使用，2-已使用
+    Integer consumed = 14;
+    //使用时间
+    Long consumedTime = 15;
+    //验券人
+    Long validBy = 16;
+    //验券机构
+    Long validOrg = 17;
+    //订单id
+    Long orderId = 18;
+    //机构名称
+    String orgName = 19;
+    //机构电话
+    String orgPhone = 20;
+    //是否被使用描述
+    String consumedDesc = 21;
+    //券码来源（0-平台发券，1-哈根达斯，2-肯德基）
+    Integer couponSource = 22;
+}
+
+message O2OCouponMixRequest {
+    //主键
+    Long id = 1;
+    //应用编号
+    Long appId = 2;
+    //订单编号
+    String orderNo = 3;
+    //商品ID
+    Long skuId = 4;
+    //商品名称
+    String productName = 5;
+    //卖家id
+    Long merchantId = 6;
+    //卖家名称
+    String sellerName = 7;
+    //券码
+    String couponCode = 8;
+    //使用有效期起始日期
+    Long effectiveDateStart = 9;
+    //使用有效期终止日期
+    Long effectiveDateEnd = 10;
+    //是否被使用，1-未使用，2-已使用
+    Integer consumed = 11;
+    //是否被使用描述
+    String consumedDesc = 12;
+    //使用时间
+    Long consumedTime = 13;
+    //使用时间开始
+    Long consumedTimeStart = 14;
+    //使用时间结束
+    Long consumedTimeEnd = 15;
+    //买家手机号码
+    String buyerPhone = 16;
+    //验券机构
+    Long validOrg = 17;
+    //机构名称
+    String orgName = 18;
+    //机构名称
+    String orgPhone = 19;
+    //创建时间
+    Long createdTime = 20;
+    //当前页
+    Integer pageNumber = 21;
+    //每页显示条目数
+    Integer pageSize = 22;
+
+    //商品封面图片
+    String coverImage = 23;
+    //商品销售金额
+    Integer sellPrice = 24;
+    //商品生效时间
+    Long productEffectTimeStart = 25;
+    //商品失效时间
+    Long productEffectTimeEnd = 26;
+    //订单编号
+    String mainOrderNo = 27;
+    //下单时间
+    Long orderTime = 28;
+    //发票抬头
+    String invoiceTitle = 29;
+    //买家备注
+    String buyerRemark = 30;
+    //验券月份
+    Integer consumedMonth = 31;
+    //验券总金额-按月
+    Integer consumedAmountMonthSum = 32;
+    //验券总金额
+    Integer consumedAmountSum = 33;
+    //验证日期
+    String consumedDay = 34;
+    //验券总金额-按日
+    Integer consumedAmountDaySum = 35;
+    //验券单数
+    Integer consumedCount = 36;
+    //商品Id
+    Long productId = 37;
+    //当前登录人的所属orgId
+    Long currentUserOrgId = 38;
+    //券码生效时期
+    String effectiveDateStr = 39;
+    //卡券消费时间
+    String consumedTimeStr = 40;
+}
+
+message O2OCouponMixRequestPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated O2OCouponMixRequest records = 3;
+    Integer current = 4;
+    Integer size = 5;
+    Integer total = 6;
+    Integer pages = 7;
+    Integer offset = 8;
+    Integer limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+
+message O2OCouponMixRequestResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated O2OCouponMixRequest dataInfo = 3;
+}
+
+message O2oCouponRequest {
+    Integer pageNumber = 5;
+    Integer pageSize = 6;
+}
+message O2oCouponResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    O2oCouponDTO dataInfo = 3;
+}
+
+message O2oCouponListResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated O2oCouponDTO dataInfo = 3;
+}
+message O2oCouponPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated O2oCouponDTO records = 3;
+    int32 current = 4;
+    int32 size = 5;
+    int32 total = 6;
+    int32 pages = 7;
+    int32 offset = 8;
+    int32 limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+service O2oCouponService {
+    rpc add (O2oCouponDTO) returns (O2oCouponResponse) {
+    }
+    rpc query (O2oCouponDTO) returns (O2oCouponResponse) {
+    }
+    rpc findList (O2oCouponDTO) returns (O2oCouponListResponse) {
+    }
+    //核销列表
+    rpc findO2OCouponConsumeStatus (O2OCouponMixRequest) returns (O2OCouponMixRequestPageResponse) {
+    }
+    //客户端商家版查看我的核销记录
+    rpc findConsumedCouponSeller (O2OCouponMixRequest) returns (O2OCouponMixRequestResponse) {
+    }
+    //客户端商家版按月份统计
+    rpc findConsumedCouponMonthSeller (O2OCouponMixRequest) returns (O2OCouponMixRequestResponse) {
+    }
+    //客户端商家版按月份统计
+    rpc findConsumedCouponDaySeller (O2OCouponMixRequest) returns (O2OCouponMixRequestResponse) {
+    }
+    rpc update (O2oCouponDTO) returns (O2oCouponResponse) {
+    }
+    rpc delete (O2oCouponDTO) returns (O2oCouponResponse) {
+    }
+    rpc page (O2oCouponRequest) returns (O2oCouponPageResponse) {
+    }
+    rpc findO2OCouponMerchant (O2OCouponMixRequest) returns (O2OCouponMixRequestResponse) {
+    }
+}

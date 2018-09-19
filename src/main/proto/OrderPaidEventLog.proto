@@ -1,0 +1,113 @@
+syntax = "proto3";
+import "type.proto";
+
+option java_package = "cn.vpclub.coupon.query.api";
+option java_outer_classname = "OrderPaidEventLogProto";
+
+message OrderPaidEventLogDTO {
+    //主键
+    Long id = 1;
+    //创建人
+    Long createdBy = 2;
+    //创建时间
+    Long createdTime = 3;
+    //更新人
+    Long updatedBy = 4;
+    //更新时间
+    Long updatedTime = 5;
+    //删除标识(1:在线; 2:删除)
+    Integer deleted = 6;
+    //app_id
+    Long appId = 7;
+    //主订单id
+    Long mainOrderId = 8;
+    //主订单编号
+    String mainOrderNo = 9;
+    //子订单id
+    Long subOrderId = 10;
+    //子订单编号
+    String subOrderNo = 11;
+    //8-O2O订单 9-卡密订单
+    String purchaseType = 12;
+    //买家id
+    Long buyerId = 13;
+    //买家姓名
+    String buyerName = 14;
+    //买家手机号
+    String buyerPhone = 15;
+    //商品SKU
+    Long skuId = 16;
+    //商品id
+    Long productId = 17;
+    //商品快照ID
+    Long productSnapshotId = 18;
+    //商品编码
+    String productCode = 19;
+    //商品名称
+    String productName = 20;
+    //商品数量
+    Long buyQty = 21;
+    //卖家id
+    Long merchantId = 22;
+    //卖家名称
+    String sellerName = 23;
+    //卖家名称
+    String orderPaidInfo = 24;
+
+    //买家备注
+    String buyerRemark = 25;
+    //发票抬头
+    String invoiceTitle = 26;
+    //商品销售金额
+    Integer sellPrice = 27;
+    //商品封面图片
+    String coverImage = 28;
+    //商品生效时间
+    Long productEffectTimeStart = 29;
+    //商品失效时间
+    Long productEffectTimeEnd = 30;
+    //商品失效时间
+    Long orderItemId = 31;
+    //卡券发放状态
+    String sendCouponStatus = 32;
+}
+message OrderPaidEventLogRequest {
+    Integer pageNumber = 5;
+    Integer pageSize = 6;
+}
+message OrderPaidEventLogResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    OrderPaidEventLogDTO dataInfo = 3;
+}
+
+message OrderPaidEventLogPageResponse {
+    Integer returnCode = 1;
+    string message = 2;
+    repeated OrderPaidEventLogDTO records = 3;
+    int32 current = 4;
+    int32 size = 5;
+    int32 total = 6;
+    int32 pages = 7;
+    int32 offset = 8;
+    int32 limit = 9;
+    string orderByField = 10;
+    bool searchCount = 11;
+    bool optimizeCount = 12;
+    bool isAsc = 13;
+}
+service OrderPaidEventLogService {
+    rpc add (OrderPaidEventLogDTO) returns (OrderPaidEventLogResponse) {
+    }
+    rpc query (OrderPaidEventLogDTO) returns (OrderPaidEventLogResponse) {
+    }
+    rpc update (OrderPaidEventLogDTO) returns (OrderPaidEventLogResponse) {
+    }
+    rpc delete (OrderPaidEventLogDTO) returns (OrderPaidEventLogResponse) {
+    }
+    rpc page (OrderPaidEventLogRequest) returns (OrderPaidEventLogPageResponse) {
+    }
+}
+
+
+
